@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="docs/banner.png" alt="StreamingHero Player" width="600">
-</p>
-
 <h1 align="center">StreamingHero Player</h1>
 
 <p align="center">
@@ -47,12 +43,22 @@ Available as:
 
 <p align="center">
   <img src="docs/screenshot-live.png" alt="Live TV" width="800"><br>
-  <em>Live TV with EPG</em>
+  <em>Live TV</em>
 </p>
 
 <p align="center">
   <img src="docs/screenshot-movies.png" alt="Movies" width="800"><br>
-  <em>Movies library</em>
+  <em>Movies with detail panel</em>
+</p>
+
+<p align="center">
+  <img src="docs/screenshot-epg.png" alt="EPG" width="800"><br>
+  <em>Electronic Program Guide</em>
+</p>
+
+<p align="center">
+  <img src="docs/screenshot-series.png" alt="Series" width="800"><br>
+  <em>Series library</em>
 </p>
 
 ## Requirements
