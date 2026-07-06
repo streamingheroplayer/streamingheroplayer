@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StreamingHero Player — Modern IPTV & Media Player</title>
+<meta name="description" content="A fast, modern IPTV player for Windows. MPV-powered, supports HEVC/4K, EPG, subtitles, downloads, and more.">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --accent: #7c6cff; --bg: #0a0a14; --surface: #12121f; --border: #1e1e35; --text: #e8e8f0; --muted: #888899; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.hero { text-align: center; padding: 80px 20px 60px; background: linear-gradient(180deg, #12121f 0%, var(--bg) 100%); }
+.hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; background: linear-gradient(135deg, #7c6cff, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 1.1rem; color: var(--muted); max-width: 500px; margin: 0 auto 32px; }
+.btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 1rem; font-weight: 600; transition: transform 0.1s, box-shadow 0.2s; }
+.btn-primary { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(124,108,255,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(124,108,255,0.4); text-decoration: none; }
+.btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); margin-left: 12px; }
+.btn-secondary:hover { border-color: var(--accent); text-decoration: none; }
+.version { display: inline-block; margin-top: 16px; font-size: 0.8rem; color: var(--muted); padding: 4px 12px; background: var(--surface); border-radius: 6px; border: 1px solid var(--border); }
+
+.features { max-width: 900px; margin: 0 auto; padding: 60px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.feature { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+.feature .icon { font-size: 1.5rem; margin-bottom: 8px; }
+.feature h3 { font-size: 0.95rem; margin-bottom: 6px; }
+.feature p { font-size: 0.8rem; color: var(--muted); }
+
+.screenshot { text-align: center; padding: 40px 20px; }
+.screenshot img { max-width: 900px; width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+
+.cta { text-align: center; padding: 60px 20px; }
+.cta h2 { font-size: 1.5rem; margin-bottom: 8px; }
+.cta p { color: var(--muted); margin-bottom: 24px; }
+
+.footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--muted); }
+.footer a { color: var(--muted); }
+
+.legal { max-width: 600px; margin: 0 auto; padding: 0 20px 40px; text-align: center; font-size: 0.7rem; color: #555; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>StreamingHero Player</h1>
+  <p>A modern, fast IPTV & media player for Windows. MPV-powered with full HEVC/4K support.</p>
+  <a href="https://github.com/streamingheroplayer/streamingheroplayer/releases/latest" class="btn btn-primary">⬇ Download for Windows</a>
+  <a href="https://github.com/streamingheroplayer/streamingheroplayer" class="btn btn-secondary">GitHub</a>
+  <div class="version">v0.9.0-beta • Windows 10/11</div>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <div class="icon">📺</div>
+    <h3>Live TV & EPG</h3>
+    <p>Watch live channels with electronic program guide. Supports M3U and Xtream Codes playlists.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">⚡</div>
+    <h3>MPV Engine</h3>
+    <p>Hardware-accelerated playback. HEVC, H.265, 4K, and virtually any codec out of the box.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🎬</div>
+    <h3>Movies & Series</h3>
+    <p>Browse VOD content with posters, ratings, and categories. Download for offline viewing.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🔍</div>
+    <h3>Auto Subtitles</h3>
+    <p>Automatic subtitle download from OpenSubtitles. Multi-language support.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">📱</div>
+    <h3>Remote Control</h3>
+    <p>Control playback from your phone. No app needed — works in any browser on your network.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🎨</div>
+    <h3>Modern UI</h3>
+    <p>Clean dark interface with customizable accent colors, resizable sidebar, and keyboard shortcuts.</p>
+  </div>
+</div>
+
+<div class="screenshot">
+  <img src="docs/screenshot-live.png" alt="StreamingHero Player screenshot">
+</div>
+
+<div class="cta">
+  <h2>Try the Beta</h2>
+  <p>Free to use. No account required. Bring your own IPTV playlist.</p>
+  <a href="https://github.com/streamingheroplayer/streamingheroplayer/releases/latest" class="btn btn-primary">⬇ Download v0.9.0-beta</a>
+</div>
+
+<div class="legal">
+  StreamingHero Player is a media player application. It does not host, provide, or distribute any content or IPTV services. Users are responsible for the content they access.
+</div>
+
+<div class="footer">
+  <a href="https://github.com/streamingheroplayer/streamingheroplayer">GitHub</a> •
+  <a href="https://github.com/streamingheroplayer/streamingheroplayer/issues">Feedback</a> •
+  <a href="https://github.com/streamingheroplayer/streamingheroplayer/blob/main/CHANGELOG.md">Changelog</a>
+</div>
+
+</body>
+</html>
