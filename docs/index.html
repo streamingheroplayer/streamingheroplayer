@@ -5,62 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>StreamingHero Player — Modern IPTV & Media Player</title>
 <meta name="description" content="A fast, modern IPTV player for Windows. MPV-powered, supports HEVC/4K, EPG, subtitles, downloads, and more.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📺</text></svg>">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-:root { --accent: #7c6cff; --bg: #0a0a14; --surface: #12121f; --border: #1e1e35; --text: #e8e8f0; --muted: #888899; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+:root { --accent: #7c6cff; --accent-glow: rgba(124,108,255,0.15); --bg: #06060e; --surface: #0f0f1a; --surface-hover: #161625; --border: #1a1a30; --text: #eaeaf4; --muted: #7a7a95; --radius: 16px; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-.hero { text-align: center; padding: 80px 20px 60px; background: linear-gradient(180deg, #12121f 0%, var(--bg) 100%); }
-.hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; background: linear-gradient(135deg, #7c6cff, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { font-size: 1.1rem; color: var(--muted); max-width: 500px; margin: 0 auto 32px; }
-.btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 1rem; font-weight: 600; transition: transform 0.1s, box-shadow 0.2s; }
-.btn-primary { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(124,108,255,0.3); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(124,108,255,0.4); text-decoration: none; }
-.btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); margin-left: 12px; }
-.btn-secondary:hover { border-color: var(--accent); text-decoration: none; }
-.version { display: inline-block; margin-top: 16px; font-size: 0.8rem; color: var(--muted); padding: 4px 12px; background: var(--surface); border-radius: 6px; border: 1px solid var(--border); }
+/* Hero */
+.hero { position: relative; text-align: center; padding: 100px 20px 80px; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(124,108,255,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 100px; background: var(--surface); border: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); margin-bottom: 24px; }
+.hero-badge span { color: var(--accent); font-weight: 600; }
+.hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #7c6cff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 1.15rem; color: var(--muted); max-width: 520px; margin: 0 auto 40px; }
+.hero-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 12px; font-size: 0.95rem; font-weight: 600; transition: all 0.2s ease; border: none; cursor: pointer; }
+.btn-primary { background: linear-gradient(135deg, #7c6cff, #6355e0); color: white; box-shadow: 0 4px 24px rgba(124,108,255,0.3), inset 0 1px 0 rgba(255,255,255,0.1); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,108,255,0.4); text-decoration: none; }
+.btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { border-color: var(--accent); background: var(--surface-hover); text-decoration: none; }
+.hero-meta { margin-top: 20px; font-size: 0.78rem; color: var(--muted); }
 
-.features { max-width: 900px; margin: 0 auto; padding: 60px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-.feature { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-.feature .icon { font-size: 1.5rem; margin-bottom: 8px; }
-.feature h3 { font-size: 0.95rem; margin-bottom: 6px; }
-.feature p { font-size: 0.8rem; color: var(--muted); }
+/* Features */
+.section-title { text-align: center; padding: 60px 20px 0; }
+.section-title h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+.section-title p { color: var(--muted); font-size: 0.95rem; }
+.features { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.feature { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: border-color 0.2s, transform 0.2s; }
+.feature:hover { border-color: rgba(124,108,255,0.3); transform: translateY(-2px); }
+.feature .icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-glow); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 14px; }
+.feature h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.feature p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
 
-.screenshot { text-align: center; padding: 40px 20px; }
-.screenshot img { max-width: 900px; width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+/* Screenshots */
+.screenshots { max-width: 1060px; margin: 0 auto; padding: 20px 20px 80px; }
+.tabs { display: flex; justify-content: center; gap: 4px; margin-bottom: 24px; background: var(--surface); border-radius: 12px; padding: 4px; width: fit-content; margin-left: auto; margin-right: auto; border: 1px solid var(--border); }
+.tab { padding: 10px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; border: none; background: none; }
+.tab.active { background: var(--accent); color: white; }
+.tab:hover:not(.active) { color: var(--text); }
+.tab-content { display: none; animation: fadeIn 0.3s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.screenshot-frame { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,108,255,0.05); }
+.screenshot-frame img { width: 100%; display: block; }
 
-.cta { text-align: center; padding: 60px 20px; }
-.cta h2 { font-size: 1.5rem; margin-bottom: 8px; }
-.cta p { color: var(--muted); margin-bottom: 24px; }
+/* CTA */
+.cta { text-align: center; padding: 80px 20px; position: relative; }
+.cta::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(circle, rgba(124,108,255,0.06) 0%, transparent 70%); pointer-events: none; }
+.cta h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
+.cta p { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; }
+.cta-features { display: flex; justify-content: center; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+.cta-features span { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.cta-features span::before { content: '✓'; color: var(--accent); font-weight: 700; }
 
-.footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--muted); }
-.footer a { color: var(--muted); }
+/* Footer */
+.footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); }
+.footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+.footer-links a { font-size: 0.82rem; color: var(--muted); transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); text-decoration: none; }
+.legal { font-size: 0.7rem; color: #444; max-width: 500px; margin: 0 auto; line-height: 1.5; }
 
-.legal { max-width: 600px; margin: 0 auto; padding: 0 20px 40px; text-align: center; font-size: 0.7rem; color: #555; }
+@media (max-width: 600px) {
+  .hero { padding: 60px 16px 50px; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .btn-secondary { margin-left: 0; }
+  .tabs { flex-wrap: wrap; }
+}
 </style>
 </head>
 <body>
 
 <div class="hero">
+  <div class="hero-badge">🚀 <span>v1.0.0-beta</span> now available</div>
   <h1>StreamingHero Player</h1>
-  <p>A modern, fast IPTV & media player for Windows. MPV-powered with full HEVC/4K support.</p>
-  <a href="https://github.com/streamingheroplayer/streamingheroplayer/releases/latest" class="btn btn-primary">⬇ Download for Windows</a>
-  <a href="https://github.com/streamingheroplayer/streamingheroplayer" class="btn btn-secondary">GitHub</a>
-  <div class="version">v1.0.0-beta • Windows 10/11</div>
+  <p>A modern, blazing-fast IPTV & media player for Windows. Powered by MPV with full HEVC/4K support.</p>
+  <div class="hero-buttons">
+    <a href="https://github.com/streamingheroplayer/streamingheroplayer/releases/latest" class="btn btn-primary">⬇ Download for Windows</a>
+    <a href="https://github.com/streamingheroplayer/streamingheroplayer" class="btn btn-secondary">⭐ GitHub</a>
+  </div>
+  <div class="hero-meta">Windows 10/11 • Free • No account required</div>
+</div>
+
+<div class="section-title">
+  <h2>Everything you need to watch</h2>
+  <p>One player for live TV, movies, series, and more.</p>
 </div>
 
 <div class="features">
   <div class="feature">
     <div class="icon">📺</div>
     <h3>Live TV & EPG</h3>
-    <p>Watch live channels with electronic program guide. Supports M3U and Xtream Codes playlists.</p>
+    <p>Watch live channels with a full electronic program guide. Supports M3U and Xtream Codes playlists.</p>
   </div>
   <div class="feature">
     <div class="icon">⚡</div>
     <h3>MPV Engine</h3>
-    <p>Hardware-accelerated playback. HEVC, H.265, 4K, and virtually any codec out of the box.</p>
+    <p>Hardware-accelerated playback. HEVC, H.265, 4K, and virtually any codec — zero configuration needed.</p>
   </div>
   <div class="feature">
     <div class="icon">🎬</div>
@@ -68,57 +110,78 @@ a:hover { text-decoration: underline; }
     <p>Browse VOD content with posters, ratings, and categories. Download for offline viewing.</p>
   </div>
   <div class="feature">
-    <div class="icon">🔍</div>
+    <div class="icon">💬</div>
     <h3>Auto Subtitles</h3>
-    <p>Automatic subtitle download from OpenSubtitles. Multi-language support.</p>
+    <p>Automatic subtitle download from OpenSubtitles with multi-language support.</p>
   </div>
   <div class="feature">
     <div class="icon">📱</div>
     <h3>Remote Control</h3>
-    <p>Control playback from your phone. No app needed — works in any browser on your network.</p>
+    <p>Control playback from your phone. No app needed — works in any browser on your local network.</p>
   </div>
   <div class="feature">
     <div class="icon">🎨</div>
-    <h3>Modern UI</h3>
-    <p>Clean dark interface with customizable accent colors, resizable sidebar, and keyboard shortcuts.</p>
+    <h3>Modern Interface</h3>
+    <p>Clean dark UI with customizable accent colors, resizable panels, and keyboard shortcuts.</p>
   </div>
 </div>
 
-<div class="screenshot">
-  <img src="screenshot-live.png" alt="Live TV">
-  <p style="color: var(--muted); font-size: 0.8rem; margin-top: 12px;">Live TV</p>
+<div class="section-title">
+  <h2>See it in action</h2>
+  <p>Clean interface, packed with features.</p>
 </div>
 
-<div class="screenshot">
-  <img src="screenshot-movies.png" alt="Movies">
-  <p style="color: var(--muted); font-size: 0.8rem; margin-top: 12px;">Movies with detail panel</p>
-</div>
-
-<div class="screenshot">
-  <img src="screenshot-epg.png" alt="EPG Guide">
-  <p style="color: var(--muted); font-size: 0.8rem; margin-top: 12px;">Electronic Program Guide</p>
-</div>
-
-<div class="screenshot">
-  <img src="screenshot-series.png" alt="Series">
-  <p style="color: var(--muted); font-size: 0.8rem; margin-top: 12px;">Series library</p>
+<div class="screenshots">
+  <div class="tabs">
+    <button class="tab active" data-tab="live">Live TV</button>
+    <button class="tab" data-tab="movies">Movies</button>
+    <button class="tab" data-tab="epg">EPG Guide</button>
+    <button class="tab" data-tab="series">Series</button>
+  </div>
+  <div class="tab-content active" id="tab-live">
+    <div class="screenshot-frame"><img src="screenshot-live.png" alt="Live TV view with channels and categories"></div>
+  </div>
+  <div class="tab-content" id="tab-movies">
+    <div class="screenshot-frame"><img src="screenshot-movies.png" alt="Movies library with posters and detail panel"></div>
+  </div>
+  <div class="tab-content" id="tab-epg">
+    <div class="screenshot-frame"><img src="screenshot-epg.png" alt="Electronic Program Guide grid"></div>
+  </div>
+  <div class="tab-content" id="tab-series">
+    <div class="screenshot-frame"><img src="screenshot-series.png" alt="Series library with posters"></div>
+  </div>
 </div>
 
 <div class="cta">
-  <h2>Try the Beta</h2>
-  <p>Free to use. No account required. Bring your own IPTV playlist.</p>
+  <h2>Ready to try it?</h2>
+  <p>Download the beta and bring your own IPTV playlist.</p>
+  <div class="cta-features">
+    <span>Free to use</span>
+    <span>No account needed</span>
+    <span>Bring your own playlist</span>
+  </div>
   <a href="https://github.com/streamingheroplayer/streamingheroplayer/releases/latest" class="btn btn-primary">⬇ Download v1.0.0-beta</a>
 </div>
 
-<div class="legal">
-  StreamingHero Player is a media player application. It does not host, provide, or distribute any content or IPTV services. Users are responsible for the content they access.
+<div class="footer">
+  <div class="footer-links">
+    <a href="https://github.com/streamingheroplayer/streamingheroplayer">GitHub</a>
+    <a href="https://github.com/streamingheroplayer/streamingheroplayer/issues">Feedback</a>
+    <a href="https://github.com/streamingheroplayer/streamingheroplayer/releases">Releases</a>
+  </div>
+  <p class="legal">StreamingHero Player is a media player application. It does not host, provide, or distribute any content or IPTV services. Users are responsible for the content they access.</p>
 </div>
 
-<div class="footer">
-  <a href="https://github.com/streamingheroplayer/streamingheroplayer">GitHub</a> •
-  <a href="https://github.com/streamingheroplayer/streamingheroplayer/issues">Feedback</a> •
-  <a href="https://github.com/streamingheroplayer/streamingheroplayer/blob/main/CHANGELOG.md">Changelog</a>
-</div>
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
 
 </body>
 </html>
